@@ -1,40 +1,60 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './LoginPage.css'; 
+import Modal from 'react-modal';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  
+import './LoginPage.css';
+
+Modal.setAppElement('#root');
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:5000/login', {
         email,
         password,
       });
-  
-      // Check if the response message is 'Login successful!' 
+
       if (response.data.message === 'Login successful!') {
-        setSuccessMessage(response.data.message); // Set success message
-        setErrorMessage(''); // Clear error message
+        setSuccessMessage(response.data.message);
+        setErrorMessage('');
+        console.log('Login succesfull!');
+        openModal(); 
       } else {
-        setErrorMessage(response.data.message || 'User not found or incorrect password.'); // Display server message or fallback error
-        setSuccessMessage(''); // Clear success message
+        setErrorMessage(response.data.message || 'User not found or incorrect password.');
+        setSuccessMessage('');
+        
+        openModal(); 
       }
     } catch (error) {
-      setErrorMessage('user not found.');
-      setSuccessMessage(''); // Clear success message on error
+      setErrorMessage('User not found.');
+      setSuccessMessage('');
+      console.log('user not signed in sign in first');
+      openModal(); 
     }
   };
-  
+
+  // Open Modal
+  const openModal = () => setModalIsOpen(true);
+
+  // Close Modal
+  const closeModal = () => setModalIsOpen(false);
 
   return (
     <div className="login-container">
+      <div className='top-container'>
+        <img className="img" src="./way2.png" alt="Way2News Logo"/>
+        <h1 style={{textAlign:"center", color:"gold"}}>Way2News</h1>
+      </div>
       <h2>Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="input-group">
@@ -50,31 +70,48 @@ const LoginForm = () => {
         </div>
         <div className="input-group">
           <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
+          <div className="password-container">
+            <input
+              type={passwordVisible ? 'text' : 'password'} 
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+            <span
+              className="password-toggle-icon"
+              onClick={() => setPasswordVisible(!passwordVisible)} 
+            >
+              {passwordVisible ? <FaEyeSlash /> : <FaEye />}  
+            </span>
+          </div>
         </div>
         <button type="submit" className="login-button">
           Log In
         </button>
       </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}         
-       <p className="signup-link">
-            Dont have an account? <Link to="/signup">signup here</Link>
-        </p>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Message Modal"
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        <div className="modal-message">
+          <p className={errorMessage ? "error-message" : "success-message"}>
+            {errorMessage || successMessage}
+          </p>
+          <button onClick={closeModal} className="modal-close-button">Close</button>
         </div>
-      );
+      </Modal>
+
+      <p className="signup-link">
+        Don't have an account? <Link to="/signup">Signup here</Link>
+      </p>
+    </div>
+  );
 };
-export default LoginForm
 
-
-
-
-
-
+export default LoginForm;
