@@ -128,4 +128,3 @@ db.query('SELECT * FROM users', (err, result) => {
     }
     console.log('Data from users table:', result);
   });
-  

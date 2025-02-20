@@ -63,7 +63,6 @@ textarea.form-input {
     background-color: #0056b3;
 }
 
-/* News Cards Container */
 .news-cards-container {
     margin-top: 30px;
     display: flex;
@@ -71,7 +70,6 @@ textarea.form-input {
     gap: 15px;
 }
 
-/* News Card */
 .news-card {
     background-color: #f0f8ff;
     border-radius: 8px;

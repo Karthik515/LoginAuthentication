@@ -5,7 +5,7 @@ const HomePage = () => {
   const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState(null);
-  const [newsList, setNewsList] = useState([]); // Store all news 
+  const [newsList, setNewsList] = useState([]); 
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -14,7 +14,7 @@ const HomePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Create a unique file preview URL for each submission
+    
     const filePreview = file ? URL.createObjectURL(file) : '';
 
     // Create the news object to be added to the list
@@ -28,11 +28,10 @@ const HomePage = () => {
 
     // Add the new news to the list
     setNewsList([...newsList, newNews]);
-
-    
     setHeadline('');
     setDescription('');
     setFile(null);
+    console.log(newNews);
   };
 
   const handleCloseCard = (id) => {
@@ -102,7 +101,7 @@ const HomePage = () => {
             </button>
           </div>
         ))}
-      </div>
+      </div>                              
     </div>
   );
 };
