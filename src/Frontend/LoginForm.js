@@ -104,6 +104,9 @@ const LoginForm = () => {
             {errorMessage || successMessage}
           </p>
           <button onClick={closeModal} className="modal-close-button">Close</button>
+          <button style = {{marginLeft:"50px"}}className="modal-close-button">
+            <Link to = "/Home">Continue</Link>
+            </button>
         </div>
       </Modal>
 
