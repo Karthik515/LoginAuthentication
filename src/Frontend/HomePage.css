@@ -1,12 +1,13 @@
 /* HomePage.css */
 
 .home-page {
-    max-width: 600px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffe5b4;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .title {
@@ -123,3 +124,21 @@ textarea.form-input {
 .close-btn:hover {
     background-color: #cc0000;
 }
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration-line: none;
+  }
+  
+  .logout-btn:hover {
+    background-color: #ff1a1a;
+  }
+  

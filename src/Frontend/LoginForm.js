@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';  
 import './LoginPage.css';
 
-Modal.setAppElement('#root');
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -104,9 +104,13 @@ const LoginForm = () => {
             {errorMessage || successMessage}
           </p>
           <button onClick={closeModal} className="modal-close-button">Close</button>
-          <button style = {{marginLeft:"50px"}}className="modal-close-button">
-            <Link to = "/Home">Continue</Link>
-            </button>
+
+          {successMessage && (
+              <button style={{marginLeft: "50px"}} className="modal-close-button">
+                  <Link to="/Home">Continue</Link>
+              </button>
+            )}
+
         </div>
       </Modal>
 

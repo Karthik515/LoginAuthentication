@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -41,6 +42,9 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+      <button className="logout-btn">
+        <Link to = '/login'>Logout</Link>
+      </button>
       <h1 className="title">News Submission</h1>
 
       <form className="news-form" onSubmit={handleSubmit}>

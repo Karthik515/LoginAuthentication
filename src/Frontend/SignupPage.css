@@ -1,6 +1,9 @@
-
-  /* SignupPage.css */
-
+  .signup-bg {
+    height: 100vh; 
+    width: 100%;
+    /*background-image: url('/home/sys2025/Desktop/project/myapp/public/way2logo.webp');*/                          
+    background-size: cover;
+  }
 .signup-container {
   max-width: 400px;
   margin: 0 auto;
